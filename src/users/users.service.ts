@@ -1,6 +1,6 @@
+import * as bcrypt from 'bcrypt';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import * as bcrypt from 'bcrypt';
 
 export type User = {
   id: number;
@@ -34,4 +34,8 @@ export class UsersService {
       ),
     },
   ];
+
+  async findOne(username: string): Promise<User | undefined> {
+    return this.users.find((user) => user.username === username);
+  }
 }
