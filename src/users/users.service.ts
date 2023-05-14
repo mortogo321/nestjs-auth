@@ -11,7 +11,7 @@ export type User = {
 
 @Injectable()
 export class UsersService {
-  constructor(private readonly configService: ConfigService) {}
+  constructor(private configService: ConfigService) {}
 
   // Demo User Data for test only
   private readonly users: User[] = [
@@ -37,5 +37,9 @@ export class UsersService {
 
   async findOne(username: string): Promise<User | undefined> {
     return this.users.find((user) => user.username === username);
+  }
+
+  async findById(id: number): Promise<User | undefined> {
+    return this.users.find((user) => user.id === id);
   }
 }

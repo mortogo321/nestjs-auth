@@ -4,21 +4,21 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import appConfig from './configs/app.config';
 import { ConfigModule } from '@nestjs/config';
-import { PassportModule } from '@nestjs/passport';
-import { LocalStrategy } from '@app/common/auth/strategies/local.strategy';
-import { AuthService } from '@app/common';
+import { AuthModule, AuthService } from '@app/common';
+import { JwtService } from '@nestjs/jwt';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       envFilePath: '.env',
       isGlobal: true,
+      cache: true,
       load: [appConfig],
     }),
     UsersModule,
-    PassportModule,
+    AuthModule,
   ],
   controllers: [AppController],
-  providers: [AppService, AuthService, LocalStrategy],
+  providers: [AppService, AuthService, JwtService],
 })
 export class AppModule {}
